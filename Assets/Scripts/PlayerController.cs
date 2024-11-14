@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private SpriteRenderer spriteRenderer; 
-    [SerializeField] private Sprite spriteW; 
-    [SerializeField] private Sprite spriteS; 
-    [SerializeField] private Sprite spriteA; 
-    [SerializeField] private Sprite spriteD; 
+    [SerializeField] private Sprite spriteW; // Sprite para moverse arriba
+    [SerializeField] private Sprite spriteS; // Sprite para moverse abajo
+    [SerializeField] private Sprite spriteA; // Sprite para moverse a la izquierda
+    [SerializeField] private Sprite spriteD; // Sprite para moverse a la derecha
 
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         PlayerInput();
-        ChangeSprite();
+        ChangeSpriteBasedOnMovement();
     }
 
     private void FixedUpdate()
@@ -52,24 +52,26 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
 
-    private void ChangeSprite()
+    private void ChangeSpriteBasedOnMovement()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        // Cambiar sprite basado en la dirección del movimiento
+        if (movement.y > 0)
         {
-            spriteRenderer.sprite = spriteW;
+            spriteRenderer.sprite = spriteW; // Movimiento hacia arriba
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (movement.y < 0)
         {
-            spriteRenderer.sprite = spriteS;
+            spriteRenderer.sprite = spriteS; // Movimiento hacia abajo
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (movement.x < 0)
         {
-            spriteRenderer.sprite = spriteA;
+            spriteRenderer.sprite = spriteA; // Movimiento hacia la izquierda
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (movement.x > 0)
         {
-            spriteRenderer.sprite = spriteD;
+            spriteRenderer.sprite = spriteD; // Movimiento hacia la derecha
         }
     }
 }
+
 
