@@ -152,7 +152,6 @@ ScriptedImporter:
     cells:
     - name: mirar_izquierda_guerrero
       frameIndex: 0
-      additiveSortOrder: 0
       cellRect:
         x: 7
         y: 7
